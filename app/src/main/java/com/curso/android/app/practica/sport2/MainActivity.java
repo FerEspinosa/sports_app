@@ -1,6 +1,8 @@
 package com.curso.android.app.practica.sport2;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemClickListener {
 
     // 1- AdapterView: RecyclerView
     RecyclerView recyclerView;
@@ -55,5 +57,14 @@ public class MainActivity extends AppCompatActivity {
         // Set layout manager to position the items
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
+        // link adapter to clickListener
+        adapter.setClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v, int position) {
+        String clickedSport = sports.get(position).getSportName();
+        Toast.makeText(getApplicationContext(), clickedSport, Toast.LENGTH_SHORT).show();
     }
 }
